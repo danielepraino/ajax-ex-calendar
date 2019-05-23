@@ -70,4 +70,5 @@ $(".btn").click(function(){
   moveMonth(thisClass);
 });
 
+//richiamo la funzione per generare subito la prima pagina del calendario
 calendarPageGen(momentDate, daysInMonth);
