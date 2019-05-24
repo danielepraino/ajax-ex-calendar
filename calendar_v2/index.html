@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>ajax-ex-calendar</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calendar-container">
+        <div class="calendar-title">
+          <h1>Ajax Calendar <i class="far fa-calendar-alt"></i></h1>
+        </div>
+        <div class="calendar-page">
+          <div class="month"></div>
+          <div class="calendar-buttons">
+            <button class="btn prev"><i class="fas fa-chevron-left"></i> PREV</button>
+            <button class="btn next">NEXT <i class="fas fa-chevron-right"></i></button>
+          </div>
+          <ul class="calendar-days"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script id="days-template" type="text/x-handlebars-template">
+      <li class="day" data-holiday="{{holidayDate}}"><span>{{dayNum}}</span></li>
+    </script>
+
+    <script src="script.js" charset="utf-8"></script>
+  </body>
+</html>
