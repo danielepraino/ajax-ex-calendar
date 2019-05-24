@@ -34,6 +34,7 @@ button:focus {
 }
 
 .calendar-page {
+  height: 665px;
   background-color: #c0392b;
   border-radius: 10px;
   margin-top: 40px;
@@ -66,15 +67,26 @@ button:focus {
   margin: 2px;
   float: left;
   display: flex;
-  justify-content: end;
-}
-
-.day span {
-  padding: 5px 0 0 10px;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .day.highlight {
   background-color: #2ecc71;
+}
+
+.day-num {
+  padding: 5px 0 0 10px;
+}
+
+.holiday-name {
+  color: #0e5e2f;
+  font-size: 14px;
+  font-style: italic;
+  text-align: right;
+  padding: 0 5px 5px 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .btn {

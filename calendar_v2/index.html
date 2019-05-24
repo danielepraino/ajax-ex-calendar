@@ -28,7 +28,10 @@
     </div>
 
     <script id="days-template" type="text/x-handlebars-template">
-      <li class="day" data-holiday="{{holidayDate}}"><span>{{dayNum}}</span></li>
+      <li class="day" data-holiday="{{holidayDate}}">
+        <span class="day-num">{{dayNum}}</span>
+        <span class="holiday-name"></span>
+        </li>
     </script>
 
     <script src="script.js" charset="utf-8"></script>
