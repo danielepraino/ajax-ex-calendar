@@ -1,3 +1,6 @@
+//localizzo momentjs in italiano
+moment.locale("it");
+
 //creo una variabile con la data di partenza
 var startDate = "2018-01-01";
 
@@ -11,21 +14,29 @@ var daysInMonth = momentDate.daysInMonth();
 //january e december per settare dei limiti per lo scorrimento del calendario
 //calendarCol per settare il numero di giorni che voglio visualizzare per riga
 //holidays per memorizzare l'oggetto API
+//monthBeginWith per memorizzare da che giorno inizia il mese
 var monthCount = 0;
 var january = 0;
 var december = 11;
 var calendarCol = 7;
-var holidays;
+var holidays, monthBeginWith;
 
 //dichiaro le variabili per handlebarjs
 var daysTemplate = $("#days-template").html();
 var calendarTemplate = Handlebars.compile(daysTemplate);
 
-//creo un oggetto da passare poi ad handlebarjs
+var spacerTemplate = $("#spacer-template").html();
+var spacerHolder = Handlebars.compile(spacerTemplate);
+
+//creo gli oggetti da passare poi ad handlebarjs
 var calendarPage = {
+  num: 0,
   dayNum: 0,
-  holidayDate: 0
+  holidayDate: 0,
+  dayName: "",
 };
+
+var spacer = {};
 
 //creo una funzione che mi permette di recuperare l'oggetto holidays tramite API
 //richiamo la funzione di controllo per le festività
@@ -69,18 +80,28 @@ function moveMonth(btnClass) {
 };
 
 //creo una funzione che crea la pagina calendario, con il nome del mese
-//e il numero dei giorni
+//e il numero dei giorni, inoltre vado a creare un quadrato vuoto per
+//quanti sono i giorni prima del primo giorno iniziale del mese
+//in questo modo creo lo spazio in stile calendario, vado anche a settare
+//il nome del giorno per ogni casella
 function calendarPageGen(currentDate, days, obj) {
+  monthBeginWith = moment(currentDate).day();
+  for (var a = 0; a < monthBeginWith; a++) {
+    $(".calendar-days").append(spacerHolder(spacer));
+  }
   for (var i = 1; i <= days; i++) {
     $(".month").text(currentDate.format("MMMM YYYY"));
-    obj.dayNum = i;
+    obj.num = obj.dayNum = i;
     obj.holidayDate = currentDate.format("YYYY-MM-") + dateFormatter(i);
+    obj.dayName = moment(currentDate).add({days: i-1}).format("ddd");
+
     $(".calendar-days").append(calendarTemplate(obj));
     calendarGridGen(calendarCol);
   }
 };
 
-//creo una funzione per generare la griglia del calendario in maniera dinamica
+//creo una funzione per generare la larghezza della griglia del calendario
+//in maniera dinamica in base alla caselle che vogliamo pe riga
 function calendarGridGen(col){
   var dayWidth = $(".day").width();
   var dayMargin = $(".day").css("margin").replace("px", "");
