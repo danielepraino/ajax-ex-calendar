@@ -81,11 +81,11 @@ button:focus {
 }
 
 .day-info.even {
-  background: #ecf0f1;
+  background: #c9cfd3;
 }
 
 .day-info.odd {
-  background: #c9cfd3;
+  background: #ecf0f1;
 }
 
 .day-info.weekend {

@@ -15,6 +15,7 @@ var daysInMonth = momentDate.daysInMonth();
 //calendarCol per settare il numero di giorni che voglio visualizzare per riga
 //holidays per memorizzare l'oggetto API
 //monthBeginWith per memorizzare da che giorno inizia il mese
+//currentDay per memorizzare il numero del giorno corrente (da 0 a 6)
 var monthCount = 0;
 var january = 0;
 var december = 11;
@@ -72,6 +73,7 @@ function moveMonth(btnClass) {
   } else if (btnClass.includes("prev") && monthCount > january) {
     monthCount--;
   }
+
   $(".calendar-days").empty();
   momentDate = moment(startDate).add({months: monthCount});
   daysInMonth = momentDate.daysInMonth();
@@ -84,11 +86,16 @@ function moveMonth(btnClass) {
 //quanti sono i giorni prima del primo giorno iniziale del mese
 //in questo modo creo lo spazio in stile calendario, vado anche a settare
 //il nome del giorno per ogni casella
+//prendo il numero del giorno della settimana corrente (da 0 a 6)
+//controllo se il modulo 6 è true allora aggiunge al giorno la classe weekend
+//se il modulo di 2 è true allora aggiunge al giorno la classe even,
+//altrimenti aggiunge la classe odd
 function calendarPageGen(currentDate, days, obj) {
   monthBeginWith = moment(currentDate).day();
   for (var a = 0; a < monthBeginWith; a++) {
     $(".calendar-days").append(spacerHolder(spacer));
   }
+
   for (var i = 1; i <= days; i++) {
     $(".month").text(currentDate.format("MMMM YYYY"));
     obj.num = obj.dayNum = i;
@@ -97,12 +104,13 @@ function calendarPageGen(currentDate, days, obj) {
     currentDay = moment(obj.holidayDate).day();
     $(".calendar-days").append(calendarTemplate(obj));
     calendarGridGen(calendarCol);
+
     if (!(currentDay % 6)) {
       $(".day[data-num=" + i + "]").find(".day-info").addClass("weekend");
     } else if (!(currentDay % 2)){
-      $(".day[data-num=" + i + "]").find(".day-info").addClass("odd");
-    } else {
       $(".day[data-num=" + i + "]").find(".day-info").addClass("even");
+    } else {
+      $(".day[data-num=" + i + "]").find(".day-info").addClass("odd");
     }
   }
 };
