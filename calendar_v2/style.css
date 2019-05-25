@@ -80,8 +80,16 @@ button:focus {
   justify-content: space-between;
 }
 
+.day-info.even {
+  background: #ecf0f1;
+}
+
+.day-info.odd {
+  background: #c9cfd3;
+}
+
 .day-info.weekend {
-  background: #27ae60;
+  background: #f1c40f;
 }
 
 .day-num {
@@ -95,7 +103,7 @@ button:focus {
 }
 
 .holiday-name {
-  color: #0e5e2f;
+  color: #156636;
   font-size: 14px;
   font-style: italic;
   text-align: right;

@@ -19,7 +19,7 @@ var monthCount = 0;
 var january = 0;
 var december = 11;
 var calendarCol = 7;
-var holidays, monthBeginWith;
+var holidays, monthBeginWith, currentDay;
 
 //dichiaro le variabili per handlebarjs
 var daysTemplate = $("#days-template").html();
@@ -94,9 +94,16 @@ function calendarPageGen(currentDate, days, obj) {
     obj.num = obj.dayNum = i;
     obj.holidayDate = currentDate.format("YYYY-MM-") + dateFormatter(i);
     obj.dayName = moment(currentDate).add({days: i-1}).format("ddd");
-
+    currentDay = moment(obj.holidayDate).day();
     $(".calendar-days").append(calendarTemplate(obj));
     calendarGridGen(calendarCol);
+    if (!(currentDay % 6)) {
+      $(".day[data-num=" + i + "]").find(".day-info").addClass("weekend");
+    } else if (!(currentDay % 2)){
+      $(".day[data-num=" + i + "]").find(".day-info").addClass("odd");
+    } else {
+      $(".day[data-num=" + i + "]").find(".day-info").addClass("even");
+    }
   }
 };
 
