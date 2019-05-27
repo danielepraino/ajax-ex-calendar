@@ -140,14 +140,11 @@ $(".btn").click(function(){
 //highlight che evidenzia la casella relativa
 function holidaysCheck(){
   if (holidays.length > 0) {
-    $(".day").each(function() {
       for (var j = 0; j < holidays.length; j++) {
-        if(holidays[j].date == $(this).attr("data-holiday")) {
-          $(this).find(".holiday-name").text(holidays[j].name);
-          $(".day[data-holiday=" + holidays[j].date + "]").addClass("highlight");
-        }
+        var holidayDay = $(".day[data-holiday=" + holidays[j].date + "]");
+        holidayDay.find(".holiday-name").text(holidays[j].name);
+        holidayDay.addClass("highlight");
       }
-    });
   }
 }
 
